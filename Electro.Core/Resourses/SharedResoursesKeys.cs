@@ -56,7 +56,7 @@ namespace Electro.Core.Resourses
         public const string AlreadyExsists = "AlreadyExsists";
         public const string AlreadyNotExsists = "AlreadyNotExsists";
         public const string ProductIsNotFound = "ProductIsNotFound";
-
+        public const string CartIsEmpty = "CartIsEmpty";
 
         // User and Authentication
         public const string EmailAlreadyExists = "EmailAlreadyExists";

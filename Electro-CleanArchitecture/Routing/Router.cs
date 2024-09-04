@@ -19,6 +19,19 @@
             public const string GetById = Prefix + SignleRoute;
 
         }
+        public static class CartRouting
+        {
+            public const string Prefix = Rule + "Cart";
+            public const string GetAllProductsInCart = Prefix + "/GetAllProductsInCart";
+            public const string GetByID = Prefix + SignleRoute;
+            public const string AddProductToCart = Prefix + "/AddProductToCart";
+            public const string RemoveProductToCart = Prefix + "/RemoveProductToCart";
+            public const string ClearCart = Prefix + "/ClearCart";
+            public const string InCreaseAmount = Prefix + "/InCreaseAmount";
+            public const string DeCreaseAmount = Prefix + "/DeCreaseAmount";
+
+
+        }
         public static class CategoryRouting
         {
             public const string Prefix = Rule + "Category";

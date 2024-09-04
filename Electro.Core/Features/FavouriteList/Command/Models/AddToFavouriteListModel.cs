@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Electro.Core.Features.Cart.Command.Models
+namespace Electro.Core.Features.FavouriteList.Command.Models
 {
-    public class AddToCartModel:IRequest<Response<string>>
+    public class AddToFavouriteListModel:IRequest<Response<string>>
     {
-        public int UserId {  get; set; }
+        public int UsertId { get; set; }
         public int ProductId {  get; set; }
     }
 }

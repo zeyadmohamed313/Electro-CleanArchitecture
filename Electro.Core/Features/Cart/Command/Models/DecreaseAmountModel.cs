@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Electro.Core.Features.Cart.Command.Models
 {
-    public class AddToCartModel:IRequest<Response<string>>
+    public class DecreaseAmountModel : IRequest<Response<string>>
     {
         public int UserId {  get; set; }
         public int ProductId {  get; set; }

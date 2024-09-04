@@ -1,5 +1,6 @@
 ﻿using Electro.Data.Entites;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,10 @@ namespace Electro.Data.Configurations
                 .IsRequired();
 
             builder.Property(c => c.LastUpdated)
-                .IsRequired(false);
+           .HasColumnName("LastUpdate")
+           .HasDefaultValueSql("GETDATE()") // Default value if not provided
+           .ValueGeneratedOnAddOrUpdate() // Indicates that it’s managed by the database
+           .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore); // Ignore property during save operations
 
             // Configure relationships
             builder.HasOne(c => c.User)

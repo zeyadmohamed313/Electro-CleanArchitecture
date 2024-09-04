@@ -34,7 +34,11 @@ namespace Electro.Services.ServicesImplementations
             var cartItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
             if (cartItem == null)
             {
-                cartItem = new CartItem { ProductId = productId, Quantity = 1 };
+                var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId); 
+                cartItem = new CartItem { ProductId = productId, Quantity = 1 ,
+                    ProductName = product.Name 
+                    , UnitPrice = product.FinalPrice};
+
                 cart.CartItems.Add(cartItem);
             }
             else

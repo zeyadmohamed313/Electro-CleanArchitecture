@@ -16,7 +16,10 @@ namespace Electro.Core.Features.Cart.Command.Handler
     public class CartCommandHandler:ResponseHandler,
         IRequestHandler<AddToCartModel,Response<string>>,
         IRequestHandler<RemoveFromCartModel,Response<string>>,
-        IRequestHandler<ClearCartModel,Response<string>>
+        IRequestHandler<ClearCartModel,Response<string>>,
+        IRequestHandler<InCreaseAmountModel,Response<string>>,
+        IRequestHandler<DecreaseAmountModel, Response<string>>
+
     {
         #region Fields
         private readonly ICartServices _cartServices;
@@ -64,6 +67,19 @@ namespace Electro.Core.Features.Cart.Command.Handler
             await _cartServices.ClearCart(request.UserId);
             return Success<string>(_localizer[SharedResoursesKeys.CartCleared]);
         }
+
+        public async Task<Response<string>> Handle(InCreaseAmountModel request, CancellationToken cancellationToken)
+        {
+            await _cartServices.IncreaseAmount(request.UserId, request.ProductId);
+            return Success<string>(_localizer[SharedResoursesKeys.CartItemQuantityIncreased]);
+        }
+
+        public async Task<Response<string>> Handle(DecreaseAmountModel request, CancellationToken cancellationToken)
+        {
+            await _cartServices.DecreaseAmount(request.UserId, request.ProductId);
+            return Success<string>(_localizer[SharedResoursesKeys.CartItemQuantityDecreased]);
+        }
+
         #endregion
     }
 }

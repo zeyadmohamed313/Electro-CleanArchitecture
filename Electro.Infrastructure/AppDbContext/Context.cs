@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Electro.Data.Configurations;
 using Electro.Data.Entites;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Electro.Data.AppDbContext
 {
@@ -41,7 +42,10 @@ namespace Electro.Data.AppDbContext
             modelBuilder.ApplyConfiguration(new CategoryConfigurations());
             modelBuilder.ApplyConfiguration(new FavouriteItemConfiguration());
             modelBuilder.ApplyConfiguration(new CartItemConfiguration());
+            
         }
+
+      
 
         #endregion
 

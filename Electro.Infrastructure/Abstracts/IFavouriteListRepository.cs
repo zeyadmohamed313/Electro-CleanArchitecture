@@ -10,5 +10,9 @@ namespace Electro.Infrastructure.Abstracts
 {
     public interface IFavouriteListRepository:IGenericRepository<FavouriteList>
     {
+        Task<FavouriteList> GetFavouriteWithItemsAsync(int userId);
+        Task AddFavouriteItemAsync(FavouriteItem FavouriteItem);
+        Task RemoveFavouriteItemAsync(FavouriteItem FavouriteItem);
+        Task ClearFavouriteItemsAsync(FavouriteList favouriteList);
     }
 }

@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Cart\Query\Handler\" />
-    <Folder Include="Features\Cart\Query\Results\" />
-    <Folder Include="Features\FavouriteList\" />
     <Folder Include="Features\Authentication\" />
     <Folder Include="Features\Authorization\" />
+    <Folder Include="Features\FavouriteList\Query\Handler\" />
+    <Folder Include="Features\FavouriteList\Query\Models\" />
+    <Folder Include="Features\FavouriteList\Query\Results\" />
     <Folder Include="Features\Review\" />
     <Folder Include="Features\Payment\" />
     <Folder Include="Features\Order\" />
