@@ -9,10 +9,6 @@
   <ItemGroup>
     <Folder Include="Features\Authentication\" />
     <Folder Include="Features\Authorization\" />
-    <Folder Include="Features\FavouriteList\Query\Handler\" />
-    <Folder Include="Features\FavouriteList\Query\Models\" />
-    <Folder Include="Features\FavouriteList\Query\Results\" />
-    <Folder Include="Features\Review\" />
     <Folder Include="Features\Payment\" />
     <Folder Include="Features\Order\" />
     <Folder Include="Mapper\ProductMapping\QueryMapping\" />

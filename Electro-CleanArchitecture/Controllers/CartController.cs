@@ -12,7 +12,7 @@ namespace Electro_CleanArchitecture.Controllers
     public class CartController : AppBaseController
     {
         [HttpGet]
-        [Route(Router.CartRouting.GetAllProductsInCart)]
+        [Route(Router.CartRouting.GetAllProducts)]
         public async Task<IActionResult> GetAllProductsInCart(int UserId)
         {
             var result = NewResult(await Mediator.Send(new GetAllProductsInCartModel() {UserId=UserId }));
@@ -20,7 +20,7 @@ namespace Electro_CleanArchitecture.Controllers
         }
 
         [HttpPost]
-        [Route(Router.CartRouting.AddProductToCart)]
+        [Route(Router.CartRouting.AddProduct)]
         public async Task<IActionResult> AddProductToCart(AddToCartModel command)
         {
             var result = NewResult(await Mediator.Send(command));
@@ -28,7 +28,7 @@ namespace Electro_CleanArchitecture.Controllers
         }
 
         [HttpPut]
-        [Route(Router.CartRouting.RemoveProductToCart)]
+        [Route(Router.CartRouting.RemoveProduct)]
         public async Task<IActionResult> AddProductToCart(RemoveFromCartModel command)
         {
             var result = NewResult(await Mediator.Send(command));
@@ -52,7 +52,7 @@ namespace Electro_CleanArchitecture.Controllers
         }
 
         [HttpDelete]
-        [Route(Router.CartRouting.ClearCart)]
+        [Route(Router.CartRouting.Clear)]
         public async Task<IActionResult> ClearCart(ClearCartModel command)
         {
             var result = NewResult(await Mediator.Send(command));

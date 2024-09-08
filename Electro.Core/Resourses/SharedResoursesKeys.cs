@@ -102,6 +102,7 @@ namespace Electro.Core.Resourses
         public const string FavoriteListNotFound = "FavoriteListNotFound";
         public const string ProductAddedToFavorites = "ProductAddedToFavorites";
         public const string ProductRemovedFromFavorites = "ProductRemovedFromFavorites";
+        public const string FavouriteListCleared = "FavouriteListCleared";
 
         // Reviews
         public const string ReviewNotFound = "ReviewNotFound";

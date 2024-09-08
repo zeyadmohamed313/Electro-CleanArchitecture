@@ -8,6 +8,7 @@ using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,24 +33,29 @@ namespace Electro.Core.Features.FavouriteList.Command.Handler
             _mapper = mapper;
             _localizer = localizer;
         }
-
-
         #endregion
 
         #region Actions
-        public Task<Response<string>> Handle(AddToFavouriteListModel request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(AddToFavouriteListModel request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var result  =  await _favouriteListServices.AddToFavouriteList(request.UsertId, request.ProductId);
+
+            if (result == "Product Is Already In The FavouriteItem")
+                return BadRequest<string>(_localizer[SharedResoursesKeys.AlreadyExists]);
+
+            return Success<string>(_localizer[SharedResoursesKeys.ProductAddedToFavorites]);
         }
 
-        public Task<Response<string>> Handle(RemoveFromFavouriteList request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(RemoveFromFavouriteList request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _favouriteListServices.RemoveFromFavouriteList(request.UserId, request.ProductId);
+            return Success<string>(_localizer[SharedResoursesKeys.ProductRemovedFromFavorites]);
         }
 
-        public Task<Response<string>> Handle(ClearFavourtieList request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(ClearFavourtieList request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _favouriteListServices.ClearFavouriteList(request.UserId);
+            return Success<string>(_localizer[SharedResoursesKeys.FavouriteListCleared]);
         }
 
         #endregion
