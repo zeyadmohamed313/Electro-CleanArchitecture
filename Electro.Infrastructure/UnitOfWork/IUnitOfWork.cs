@@ -17,6 +17,8 @@ namespace Electro.Infrastructure.UnitOfWork
         IPaymentRepository PaymentRepository { get;}
         IReviewRepository ReviewRepository { get; }
         ICategoryRepository CategoryRepository { get; }
+        IRefreshTokenRepository RefreshToken { get; }
+
 
         public int Complete();
     }

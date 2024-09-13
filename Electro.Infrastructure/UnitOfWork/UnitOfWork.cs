@@ -19,10 +19,12 @@ namespace Electro.Infrastructure.UnitOfWork
         public IPaymentRepository PaymentRepository { get; private set; }
         public IReviewRepository ReviewRepository { get; private set; }
         public ICategoryRepository CategoryRepository { get; private set; }
+        public IRefreshTokenRepository RefreshToken { get; private set; }
 
         public UnitOfWork(Context context)
         {
             _context = context;
+            RefreshToken = new RefreshTokenRepository(_context);
             CartRepository = new CartRepository(_context);
             OrderRepository = new OrderRepository(_context);
             FavouriteListRepository = new FavouriteListRepository(_context);

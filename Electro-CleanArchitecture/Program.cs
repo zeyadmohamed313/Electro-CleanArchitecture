@@ -15,9 +15,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructureDependancies()
-    .AddServicesDependancies()
+    .AddServicesDependancies(builder.Configuration)
     .ServicesRegisteration()
     .AddCoreDependancies();
+
 
 
 #region Localization 

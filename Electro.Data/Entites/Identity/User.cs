@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,8 @@ namespace Electro.Data.Entites.Identity
         public string? Gender { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime? LastLoginDate { get; set; }
-   
+        public string? Code { get; set; }
+
         public int? CartId {  get; set; }
         public Cart Cart { get; set; }
         public int? FavouriteListId {  get; set; }
@@ -27,6 +29,7 @@ namespace Electro.Data.Entites.Identity
         public List<Payments>  PaymentsList { get; set; }
         public List<Review> ReviewsList {  get; set; }
 
-
+        [InverseProperty("user")]
+        public ICollection<UserRefreshToken> UserRefreshTokens { get; set; }
     }
 }

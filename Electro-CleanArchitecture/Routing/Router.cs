@@ -70,5 +70,34 @@
             public const string Delete = Prefix + SignleRoute;
 
         }
+        public static class AuthenticationRouting
+        {
+            public const string Prefix = Rule + "Authentication";
+            public const string SignIn = Prefix + "/SignIn";
+            public const string RefreshToken = Prefix + "/RefreshToken";
+            public const string ValidateToken = Prefix + "/ValidateToken";
+            public const string ConfirmEmail = "/Api/Authentication/ConfirmEmail";
+            public const string SendResetPasswordCode = Prefix + "/SendResetPasswordCode";
+            public const string ConfirmResetPasswordCode = Prefix + "/ConfirmResetPasswordCode";
+            public const string ResetPassword = Prefix + "/ResetPassword";
+
+        }
+        public static class AuthorizationRouting
+        {
+            public const string Prefix = Rule + "Authentication";
+            public const string Create = Prefix + "/Role" + "/Create";
+            public const string Edit = Prefix + "/Role" + "/Edit";
+            public const string Delete = Prefix + "/Role" + "/Delete/{id}";
+            public const string GetRoleList = Prefix + "/Role" + "/GetRoleList";
+            public const string GetRoleById = Prefix + "/Role" + "/GetRoleById/{id}";
+            public const string ManageUserRoles = Prefix + "/Role" + "/ManageUserRoles/{Id}";
+            public const string UpdateUserRoles = Prefix + "/Role" + "/UpdateUserRoles";
+            public const string ManageUserClaims = Prefix + "/Claim" + "/ManageUserClaims/{userId}";
+            public const string UpdateUserClaims = Prefix + "/Claim" + "/UpdateUserClaims";
+
+
+
+
+        }
     }
 }
