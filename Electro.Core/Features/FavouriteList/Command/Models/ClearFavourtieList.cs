@@ -10,7 +10,6 @@ namespace Electro.Core.Features.FavouriteList.Command.Models
 {
     public class ClearFavourtieList:IRequest<Response<string>>
     {
-        public int UserId { get; set; }
 
     }
 }

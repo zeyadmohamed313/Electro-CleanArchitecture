@@ -17,8 +17,7 @@ namespace Electro.Core.Features.FavouriteList.Command.Validations
 
         private void ApplyValidations()
         {
-            RuleFor(x => x.UserId)
-                   .GreaterThan(0).WithMessage("UserId must be greater than 0.");
+           
 
         }
     }

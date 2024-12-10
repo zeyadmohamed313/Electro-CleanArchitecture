@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructureDependancies()
     .AddServicesDependancies(builder.Configuration)
-    .ServicesRegisteration()
+    .ServicesRegisteration(builder.Configuration)
     .AddCoreDependancies();
 
 
@@ -70,6 +70,7 @@ app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseCors(Cors);
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -21,6 +21,9 @@ namespace Electro.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(50);
 
+            builder.Property(x => x.ImgUrl)
+                .IsRequired();
+
             // Configure Relation Ships
             builder.HasMany(c => c.Products)
                 .WithOne(c => c.Category)

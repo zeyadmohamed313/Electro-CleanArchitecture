@@ -15,7 +15,7 @@ namespace Electro_CleanArchitecture.Controllers
 		[HttpPost(Router.AuthenticationRouting.SignIn)]
         [SwaggerOperation(Summary = "تسجيل الدخول", OperationId = "SignIn")]
 
-        public async Task<IActionResult> SignIn([FromForm] SignInCommand command)
+        public async Task<IActionResult> SignIn([FromBody] SignInCommand command)
 		{
 			var response = await Mediator.Send(command);
 			return NewResult(response);

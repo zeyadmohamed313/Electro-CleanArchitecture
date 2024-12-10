@@ -18,8 +18,7 @@ namespace Electro.Core.Features.Cart.Command.Validations
         private void ApplyValidations()
         {
             
-                RuleFor(x => x.UserId)
-                    .GreaterThan(0).WithMessage("UserId must be greater than 0.");
+              
 
                 RuleFor(x => x.ProductId)
                     .GreaterThan(0).WithMessage("ProductId must be greater than 0.");

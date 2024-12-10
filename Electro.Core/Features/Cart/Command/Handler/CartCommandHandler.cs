@@ -4,10 +4,12 @@ using Electro.Core.Resourses;
 using Electro.Core.ResponseHelper;
 using Electro.Services.Abstracts;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,14 +27,16 @@ namespace Electro.Core.Features.Cart.Command.Handler
         private readonly ICartServices _cartServices;
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<SharedResourses> _localizer;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         #endregion
 
         #region Constructor
-        public CartCommandHandler(ICartServices cartServices, IMapper mapper, IStringLocalizer<SharedResourses> localizer) : base(localizer)
+        public CartCommandHandler(ICartServices cartServices, IHttpContextAccessor httpContextAccessor ,IMapper mapper, IStringLocalizer<SharedResourses> localizer) : base(localizer)
         {
             _cartServices = cartServices;
             _mapper = mapper;
             _localizer = localizer;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -41,13 +45,16 @@ namespace Electro.Core.Features.Cart.Command.Handler
         #region Actions
         public async Task<Response<string>> Handle(AddToCartModel request, CancellationToken cancellationToken)
         {
-            await _cartServices.AddToCart(request.UserId, request.ProductId);
+            var UserId = GetAuthenticatedUserId();
+            await _cartServices.AddToCart(UserId, request.ProductId);
             return Success<string>(_localizer[SharedResoursesKeys.ProductAddedToCart]);
         }
 
         public async Task<Response<string>> Handle(RemoveFromCartModel request, CancellationToken cancellationToken)
         {
-            var result = await _cartServices.RemoveFromCart(request.UserId, request.ProductId);
+            var UserId = GetAuthenticatedUserId();
+
+            var result = await _cartServices.RemoveFromCart(UserId, request.ProductId);
 
             switch(result)
             {
@@ -64,22 +71,30 @@ namespace Electro.Core.Features.Cart.Command.Handler
 
         public async Task<Response<string>> Handle(ClearCartModel request, CancellationToken cancellationToken)
         {
-            await _cartServices.ClearCart(request.UserId);
+            var UserId = GetAuthenticatedUserId();
+            await _cartServices.ClearCart(UserId);
             return Success<string>(_localizer[SharedResoursesKeys.CartCleared]);
         }
 
         public async Task<Response<string>> Handle(InCreaseAmountModel request, CancellationToken cancellationToken)
         {
-            await _cartServices.IncreaseAmount(request.UserId, request.ProductId);
+            var UserId = GetAuthenticatedUserId();
+            await _cartServices.IncreaseAmount(UserId, request.ProductId);
             return Success<string>(_localizer[SharedResoursesKeys.CartItemQuantityIncreased]);
         }
 
         public async Task<Response<string>> Handle(DecreaseAmountModel request, CancellationToken cancellationToken)
         {
-            await _cartServices.DecreaseAmount(request.UserId, request.ProductId);
+            var UserId = GetAuthenticatedUserId();
+            await _cartServices.DecreaseAmount(UserId, request.ProductId);
             return Success<string>(_localizer[SharedResoursesKeys.CartItemQuantityDecreased]);
         }
 
+        private int GetAuthenticatedUserId()
+        {
+            var UserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return int.Parse(UserId);
+        }
         #endregion
     }
 }

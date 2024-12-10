@@ -60,6 +60,7 @@ namespace Electro.Core.Features.Authentication.Handler
 			//var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
 			//if Failed Return Passord is wrong
 			if (!signInResult) return BadRequest<JwtAuthResult>(_localizer[SharedResoursesKeys.PasswordNotCorrect]);
+			user.EmailConfirmed = true; // Until i Add the feature
             if (!user.EmailConfirmed)
                 return BadRequest<JwtAuthResult>(_localizer[SharedResoursesKeys.EmailNotConfirmed]);
             //Generate Token

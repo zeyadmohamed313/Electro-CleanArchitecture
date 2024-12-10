@@ -29,12 +29,21 @@ namespace Electro.Services.ServicesImplementations
         public async Task<string> DeleteReview(int Id)
         {
             var review = await _unitOfWork.ReviewRepository.GetByIdAsync(Id);
-
+            
             if (review == null)
                 return "This Review Doesnot Exsist";
 
             await _unitOfWork.ReviewRepository.DeleteAsync(review);
             return "Success";
+        }
+
+        public async Task<List<Review>> GetAllReviewsWithProduct(int ProductId)
+        {
+            var reviews = await _unitOfWork.ReviewRepository.GetAllReviewsWithProduct(ProductId);
+
+            if(reviews.Count()== 0)
+                return new List<Review>();
+            return reviews;
         }
 
         public async Task<string> UpdateReview(Review review)

@@ -42,32 +42,7 @@ namespace Electro.Services
 
 
 
-            var jwtSettings = new Data.Helper.JwtSettings();
-            configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
-            var emailSettings = new EmailSettings();
-            configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
-
-            services.AddSingleton(jwtSettings);
-            services.AddSingleton(emailSettings); // 
-
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = jwtSettings.ValidateIssuer,
-                    ValidIssuers = new[] { jwtSettings.Issuer },
-                    ValidateIssuerSigningKey = jwtSettings.ValidateIssuerSigningKey,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
-                    ValidAudience = jwtSettings.Audience,
-                    ValidateAudience = jwtSettings.ValidateAudience,
-                    ValidateLifetime = jwtSettings.ValidateLifeTime,
-                };
-});
+          
             #endregion
 
             return services;

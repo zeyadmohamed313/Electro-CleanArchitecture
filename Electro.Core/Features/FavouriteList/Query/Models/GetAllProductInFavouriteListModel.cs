@@ -11,6 +11,5 @@ namespace Electro.Core.Features.FavouriteList.Query.Models
 {
     public class GetAllProductInFavouriteListModel:IRequest<Response<List<GetAllProductInFavouriteListResult>>>
     {
-        public int UserId {  get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace Electro.Services.Abstracts
         Task AddReview(Review review);
         Task<string> UpdateReview(Review review);
         Task<string> DeleteReview(int Id);
+        Task<List<Review>> GetAllReviewsWithProduct(int ProductId);
 
     }
 }

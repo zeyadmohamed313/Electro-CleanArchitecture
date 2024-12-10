@@ -9,5 +9,6 @@ namespace Electro.Core.Features.Review.Query.Results
     public class GetAllReviewsForProductResult
     {
         public string ReviewText {  get; set; }
+        public UserResult User { get; internal set; }
     }
 }

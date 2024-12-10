@@ -1,11 +1,7 @@
-﻿using Electro.Data.AppDbContext;
-using Electro.Data.Entites.Identity;
+﻿
 using Electro.Infrastructure.Abstracts;
 using Electro.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Identity;
-using System;
 using Electro.Infrastructure.InfrastructureBases;
 using Electro.Infrastructure.UnitOfWork;
 
@@ -13,7 +9,7 @@ namespace Electro.Infrastructure
 {
     public static class InfrastructureDependancies
     {
-        public static  IServiceCollection AddInfrastructureDependancies(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructureDependancies(this IServiceCollection services)
         {
 
             #region ServicesRegisteration

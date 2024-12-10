@@ -13,9 +13,9 @@ namespace Electro_CleanArchitecture.Controllers
     {
         [HttpGet]
         [Route(Router.CartRouting.GetAllProducts)]
-        public async Task<IActionResult> GetAllProductsInCart(int UserId)
+        public async Task<IActionResult> GetAllProductsInCart()
         {
-            var result = NewResult(await Mediator.Send(new GetAllProductsInCartModel() {UserId=UserId }));
+            var result = NewResult(await Mediator.Send(new GetAllProductsInCartModel() { }));
             return result;
         }
 
@@ -29,7 +29,7 @@ namespace Electro_CleanArchitecture.Controllers
 
         [HttpPut]
         [Route(Router.CartRouting.RemoveProduct)]
-        public async Task<IActionResult> AddProductToCart(RemoveFromCartModel command)
+        public async Task<IActionResult> RemoveProductFromCart(RemoveFromCartModel command)
         {
             var result = NewResult(await Mediator.Send(command));
             return result;

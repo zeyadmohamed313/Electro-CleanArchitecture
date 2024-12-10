@@ -25,7 +25,7 @@
             public const string GetAllProducts = Prefix + "/GetAllProductsInCart";
             public const string GetByID = Prefix + SignleRoute;
             public const string AddProduct = Prefix + "/AddProductToCart";
-            public const string RemoveProduct = Prefix + "/RemoveProductToCart";
+            public const string RemoveProduct = Prefix + "/RemoveProductFromCart";
             public const string Clear = Prefix + "/ClearCart";
             public const string InCreaseAmount = Prefix + "/InCreaseAmount";
             public const string DeCreaseAmount = Prefix + "/DeCreaseAmount";
@@ -38,7 +38,7 @@
             public const string GetAllProducts = Prefix + "/GetAllProductsInFavourite";
             public const string GetByID = Prefix + SignleRoute;
             public const string AddProduct = Prefix + "/AddProductToFavouriteLsit";
-            public const string RemoveProduct = Prefix + "/RemoveProductToFavourtie";
+            public const string RemoveProduct = Prefix + "/RemoveProductToFavourtie/{ProductId}";
             public const string Clear = Prefix + "/ClearFavouriteList";
    
         }

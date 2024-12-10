@@ -32,20 +32,46 @@ namespace Electro.Core.Features.Review.Query.Handler
             _mapper = mapper;
             _localizer = localizer;
         }
-
+        
         #endregion
 
         #region Fields
+        #region Fields
         public async Task<Response<List<GetAllReviewsForProductResult>>> Handle(GetAllReviewsForProductModel request, CancellationToken cancellationToken)
         {
-            var sql = "Select * from Reviews where ProductId = @Id";
-            var Reviews = (await _dbConnection.QueryAsync<GetAllReviewsForProductResult>(sql, new { Id = request.ProductId })).ToList();
-            if (Reviews.Count == 0)
+            var sql = @"
+                SELECT 
+                    r.*, 
+                    u.Id AS UserId, 
+                    u.UserName AS UserName, 
+                    u.Email AS UserEmail
+                FROM 
+                    Reviews r
+                INNER JOIN 
+                    Users u ON r.UserId = u.Id
+                WHERE 
+                    r.ProductId = @Id";
+
+            var reviews = (await _dbConnection.QueryAsync<GetAllReviewsForProductResult, UserResult, GetAllReviewsForProductResult>(
+                sql,
+                (review, user) =>
+                {
+                    review.User = user; // Map the user to the review
+                    return review;
+                },
+                new { Id = request.ProductId },
+                splitOn: "UserId" // Tell Dapper where the User data starts
+            )).ToList();
+
+            if (reviews.Count() == 0)
             {
                 return BadRequest<List<GetAllReviewsForProductResult>>(_localizer[SharedResoursesKeys.NotFound]);
             }
-            return Success(Reviews);
+
+            return Success(reviews);
         }
+        #endregion
+
         #endregion
 
     }

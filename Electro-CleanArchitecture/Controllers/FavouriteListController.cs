@@ -14,9 +14,9 @@ namespace Electro_CleanArchitecture.Controllers
     {
         [HttpGet]
         [Route(Router.FavouriteListRouting.GetAllProducts)]
-        public async Task<IActionResult> GetAllProducts([FromQuery]int UserId)
+        public async Task<IActionResult> GetAllProducts()
         {
-            var result = NewResult(await Mediator.Send(new GetAllProductInFavouriteListModel() { UserId = UserId }));
+            var result = NewResult(await Mediator.Send(new GetAllProductInFavouriteListModel()));
             return result;
         }
 
@@ -28,9 +28,9 @@ namespace Electro_CleanArchitecture.Controllers
             return result;
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route(Router.FavouriteListRouting.RemoveProduct)]
-        public async Task<IActionResult> RemoveProduct(RemoveFromFavouriteList command)
+        public async Task<IActionResult> RemoveProduct([FromRoute]RemoveFromFavouriteList command)
         {
             var result = NewResult(await Mediator.Send(command));
             return result;

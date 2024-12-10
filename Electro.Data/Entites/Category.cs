@@ -9,7 +9,8 @@ namespace Electro.Data.Entites
     public class Category
     {
         public int Id { get; set; } 
-        public string Name { get; set; } // The Name Of The Category
+        public string Name { get; set; } 
+        public string ImgUrl {  get; set; }
         public List<Product> Products { get; set; }
     }
 }

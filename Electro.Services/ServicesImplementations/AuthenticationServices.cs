@@ -43,6 +43,7 @@ namespace Electro.Services.ServicesImplementations
             _emailServices = emailServices;
         }
         #endregion
+
         #region HandleFunctions
         public async Task<JwtAuthResult> GetJWTToken(User user)
         {
@@ -80,7 +81,7 @@ namespace Electro.Services.ServicesImplementations
                 _jwtSettings.Issuer,
                 _jwtSettings.Audience,
                 claims,
-                expires: DateTime.Now.AddMinutes(_jwtSettings.AccessTokenExpireDate),
+                expires: DateTime.Now.AddDays(_jwtSettings.AccessTokenExpireDate),
                 signingCredentials:
                 new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)), SecurityAlgorithms.HmacSha256Signature)
                 );
@@ -112,12 +113,15 @@ namespace Electro.Services.ServicesImplementations
             {
                 new Claim(nameof(UserClaimsModel.UserName),user.UserName),
                 new Claim(nameof(UserClaimsModel.Email),user.Email),
-                new Claim(nameof(UserClaimsModel.PhoneNumber),user.PhoneNumber),
-                new Claim(nameof(UserClaimsModel.Id),user.Id.ToString()),
+                //new Claim(nameof(UserClaimsModel.PhoneNumber),user.PhoneNumber),
+                //new Claim(nameof(UserClaimsModel.Id),user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+
             };
             // adding roles
             foreach (var role in Roles)
                 claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+
             var userClaims = await _userManager.GetClaimsAsync(user);
             claims.AddRange(userClaims);
 
@@ -152,6 +156,7 @@ namespace Electro.Services.ServicesImplementations
             var response = handler.ReadJwtToken(AccessToken);
             return response;
         }
+
         public async Task<string> ValidateToken(string accessToken)
         {
             var handler = new JwtSecurityTokenHandler();

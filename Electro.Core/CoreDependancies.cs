@@ -28,7 +28,7 @@ namespace Electro.Core
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             // 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
+            services.AddHttpContextAccessor();
             services.AddTransient<IDbConnection>(sp =>
             new SqlConnection("Data Source=DESKTOP-8QKV55J\\SQLEXPRESS;Initial Catalog=Electro;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"));
             #endregion

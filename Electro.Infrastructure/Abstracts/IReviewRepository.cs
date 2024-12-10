@@ -10,6 +10,7 @@ namespace Electro.Infrastructure.Abstracts
 {
     public interface IReviewRepository:IGenericRepository<Review>
     {
+       Task<List<Review>> GetAllReviewsWithProduct(int productId);
 
     }
 }

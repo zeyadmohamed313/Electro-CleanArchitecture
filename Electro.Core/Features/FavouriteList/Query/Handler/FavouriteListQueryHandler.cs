@@ -5,14 +5,12 @@ using Electro.Core.Features.FavouriteList.Query.Results;
 using Electro.Core.Features.Review.Query.Results;
 using Electro.Core.Resourses;
 using Electro.Core.ResponseHelper;
+using Electro.Data.Helper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Electro.Core.Features.FavouriteList.Query.Handler
 {
@@ -23,14 +21,16 @@ namespace Electro.Core.Features.FavouriteList.Query.Handler
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<SharedResourses> _localizer;
         private readonly IDbConnection _dbConnection;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         #endregion
 
         #region Constructor
-        public FavouriteListQueryHandler(IDbConnection dbConnection, IMapper mapper, IStringLocalizer<SharedResourses> localizer) : base(localizer)
+        public FavouriteListQueryHandler(IDbConnection dbConnection,IHttpContextAccessor httpContextAccessor, IMapper mapper, IStringLocalizer<SharedResourses> localizer) : base(localizer)
         {
             _dbConnection = dbConnection;
             _mapper = mapper;
             _localizer = localizer;
+            _httpContextAccessor= httpContextAccessor;
         }
 
 
@@ -39,11 +39,17 @@ namespace Electro.Core.Features.FavouriteList.Query.Handler
         #region Actions
         public async Task<Response<List<GetAllProductInFavouriteListResult>>> Handle(GetAllProductInFavouriteListModel request, CancellationToken cancellationToken)
         {
+            //var userId = _httpContextAccessor.HttpContext.User.Claims.SingleOrDefault(claim => claim.Type == nameof(UserClaimsModel.Id)).Value;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+
             const string sql = @"
             SELECT 
                 p.Id AS Id,
                 p.Name AS Name,
-                p.FinalPrice AS FinalPrice
+                p.FinalPrice AS FinalPrice,
+                p.Description AS Description, 
+                p.ImageURL AS ImageURL
             FROM 
                 FavouriteLists fl
             JOIN 
@@ -53,8 +59,9 @@ namespace Electro.Core.Features.FavouriteList.Query.Handler
             WHERE 
                 fl.UserId = @UserId;";
 
+            int Id = int.Parse(userId);
             var products = (await _dbConnection.QueryAsync<GetAllProductInFavouriteListResult>(
-                sql, new { UserId = request.UserId })).ToList();
+                sql, new { UserId = Id })).ToList();
 
 
             if (products.Count == 0)

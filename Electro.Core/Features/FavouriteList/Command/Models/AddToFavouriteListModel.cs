@@ -10,7 +10,6 @@ namespace Electro.Core.Features.FavouriteList.Command.Models
 {
     public class AddToFavouriteListModel:IRequest<Response<string>>
     {
-        public int UsertId { get; set; }
         public int ProductId {  get; set; }
     }
 }
