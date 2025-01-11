@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Electro.Data.Entites
+namespace Electro.Core.Features.Blog.Query.Result
 {
-    public class Blog
+    public class GetAllBlogsResult
     {
-        public int Id {  get; set; }
         public BlogType Type { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -17,6 +16,5 @@ namespace Electro.Data.Entites
         public string AuthorImageUrl { get; set; }
         public DateTime Date { get; set; }
         public string ContentUrl { get; set; }
-
     }
 }

@@ -42,10 +42,11 @@ namespace Electro.Data.AppDbContext
             modelBuilder.ApplyConfiguration(new CategoryConfigurations());
             modelBuilder.ApplyConfiguration(new FavouriteItemConfiguration());
             modelBuilder.ApplyConfiguration(new CartItemConfiguration());
-            
+            modelBuilder.ApplyConfiguration(new BlogConfiguration());
+            modelBuilder.ApplyConfiguration(new ChatMessageConfigurations());
         }
 
-      
+
 
         #endregion
 
@@ -61,6 +62,8 @@ namespace Electro.Data.AppDbContext
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<FavouriteList> FavouriteLists { get; set; }
         public DbSet<FavouriteItem> FavouriteItems { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
 
         #endregion
     }

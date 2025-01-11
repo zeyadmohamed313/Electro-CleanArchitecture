@@ -4,6 +4,7 @@ using Electro.Data.AppDbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Electro.Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250111074323_AddingBlogs")]
+    partial class AddingBlogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,7 @@ namespace Electro.Infrastructure.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 11, 14, 46, 46, 717, DateTimeKind.Utc).AddTicks(1147));
+                        .HasDefaultValue(new DateTime(2025, 1, 11, 7, 43, 23, 36, DateTimeKind.Utc).AddTicks(2719));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -160,39 +163,6 @@ namespace Electro.Infrastructure.Migrations
                         .HasDatabaseName("IX_Category_Name");
 
                     b.ToTable("Categories", (string)null);
-                });
-
-            modelBuilder.Entity("Electro.Data.Entites.ChatMessage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReceiverId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SenderId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Timestamp")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 11, 14, 46, 46, 717, DateTimeKind.Utc).AddTicks(2343));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ChatMessages");
                 });
 
             modelBuilder.Entity("Electro.Data.Entites.FavouriteItem", b =>

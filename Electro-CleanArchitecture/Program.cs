@@ -4,6 +4,10 @@ using Electro.Core;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Electro.Core.Middlewares;
+using Stripe;
+using Electro.Data.Helper;
+using Microsoft.AspNetCore.SignalR;
+using Electro.Core.HUB;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +61,16 @@ builder.Services.AddCors(options =>
 );
 #endregion
 
+
+#region Stripe
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+#endregion
+
+#region SignalR
+builder.Services.AddSignalR();
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -72,6 +86,7 @@ app.UseHttpsRedirection();
 app.UseCors(Cors);
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapHub<ChatHub>("/chatHub");
 
 app.MapControllers();
 

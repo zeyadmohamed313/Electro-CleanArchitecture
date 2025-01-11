@@ -18,7 +18,7 @@ namespace Electro.Infrastructure.UnitOfWork
         IReviewRepository ReviewRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         IRefreshTokenRepository RefreshToken { get; }
-
+        IBlogRepository BlogRepository { get; }
 
         public int Complete();
     }

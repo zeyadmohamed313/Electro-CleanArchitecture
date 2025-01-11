@@ -15,6 +15,7 @@ namespace Electro.Core.Resourses
         public const string Update = "Update";
         public const string Success = "Success";
         public const string NotEmpty = "NotEmpty";
+        public const string Empty = "Empty";
         public const string Name = "Name";
         public const string MaxLengthis100 = "MaxLengthis100";
         public const string IsExist = "IsExist";
@@ -110,6 +111,10 @@ namespace Electro.Core.Resourses
         public const string ReviewUpdated = "ReviewUpdated";
         public const string ReviewDeleted = "ReviewDeleted";
         public const string ReviewAlreadyExists = "ReviewAlreadyExists";
+
+        // Reviews 
+        public const string FaliedToAddBlog = "Faild To Add Blog";
+
 
         // General Errors
         public const string AlreadyExists = "AlreadyExists";

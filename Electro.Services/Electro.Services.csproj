@@ -10,8 +10,10 @@
     <PackageReference Include="jose-jwt" Version="5.0.0" />
     <PackageReference Include="MailKit" Version="4.7.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.20" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="MimeKit" Version="4.7.1" />
+    <PackageReference Include="Stripe.net" Version="47.2.0" />
   </ItemGroup>
 
   <ItemGroup>

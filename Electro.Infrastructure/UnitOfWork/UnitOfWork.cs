@@ -20,7 +20,7 @@ namespace Electro.Infrastructure.UnitOfWork
         public IReviewRepository ReviewRepository { get; private set; }
         public ICategoryRepository CategoryRepository { get; private set; }
         public IRefreshTokenRepository RefreshToken { get; private set; }
-
+        public IBlogRepository BlogRepository { get; private set; }
         public UnitOfWork(Context context)
         {
             _context = context;
@@ -32,6 +32,7 @@ namespace Electro.Infrastructure.UnitOfWork
             PaymentRepository = new PaymentRepository(_context);
             ProductRepository = new ProductRepository(_context);
             CategoryRepository = new CategoryRepository(_context);
+            BlogRepository = new BlogRespository(_context);
 
         }
 

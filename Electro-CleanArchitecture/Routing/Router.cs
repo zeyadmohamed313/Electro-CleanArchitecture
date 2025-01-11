@@ -19,6 +19,19 @@
             public const string GetById = Prefix + SignleRoute;
 
         }
+        public static class BlogRouting
+        {
+            public const string Prefix = Rule + "Blog";
+            public const string List = Prefix + "/List";
+            public const string GetByID = Prefix + SignleRoute;
+            public const string Create = Prefix + "/Add";
+            public const string Edit = Prefix + "/Update";
+            public const string Delete = Prefix + "/Delete" + SignleRoute;
+            public const string TopSelling = Prefix + "/TopSelling";
+            public const string Paginated = Prefix + "/Paginated";
+            public const string GetById = Prefix + SignleRoute;
+        }
+
         public static class CartRouting
         {
             public const string Prefix = Rule + "Cart";

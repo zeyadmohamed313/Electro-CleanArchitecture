@@ -33,11 +33,12 @@ namespace Electro.Services
             services.AddScoped<IOrderServices, OrderServices>();
             services.AddScoped<IReviewServices, ReviewServices>();
             services.AddScoped<IProductServices, ProductServicescs>();
-            services.AddScoped<IPaymentServices, PaymentServices>();
             services.AddScoped<ICategoryServices, CategoryServices>();
+            services.AddScoped < IblogServices, BlogServices>();    
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IAuthenticationServices, AuthenticationServices>();
             services.AddScoped<IEmailServices, EmailServices>();
+            services.AddScoped<PaymentService>();
             services.AddSingleton(new ConcurrentDictionary<string, RefreshToken>());
 
 

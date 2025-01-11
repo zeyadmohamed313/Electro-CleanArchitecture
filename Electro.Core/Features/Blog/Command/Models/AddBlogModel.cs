@@ -1,15 +1,16 @@
-﻿using Electro.Data.Helper;
+﻿using Electro.Core.ResponseHelper;
+using Electro.Data.Helper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Electro.Data.Entites
+namespace Electro.Core.Features.Blog.Command.Models
 {
-    public class Blog
+    public class AddBlogModel:IRequest<Response<string>>
     {
-        public int Id {  get; set; }
         public BlogType Type { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -17,6 +18,5 @@ namespace Electro.Data.Entites
         public string AuthorImageUrl { get; set; }
         public DateTime Date { get; set; }
         public string ContentUrl { get; set; }
-
     }
 }
