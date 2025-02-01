@@ -3,12 +3,14 @@ using Electro.Core.Features.Review.Query.Models;
 using Electro.Data.Entites;
 using Electro_CleanArchitecture.Bases;
 using Electro_CleanArchitecture.Routing;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Electro_CleanArchitecture.Controllers
 {
     [ApiController]
+    [Authorize]
     public class ReviewsController : AppBaseController
     {
         #region Actions

@@ -4,12 +4,13 @@ using Electro.Core.Features.FavouriteList.Command.Models;
 using Electro.Core.Features.FavouriteList.Query.Models;
 using Electro_CleanArchitecture.Bases;
 using Electro_CleanArchitecture.Routing;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Electro_CleanArchitecture.Controllers
 {
-    [ApiController]
+    [Authorize]
     public class FavouriteListController : AppBaseController
     {
         [HttpGet]

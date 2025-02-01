@@ -1,12 +1,13 @@
 ﻿using Electro.Data.Helper;
 using Electro_CleanArchitecture.Bases;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
 
 namespace Electro_CleanArchitecture.Controllers
 {
-    
+    [Authorize]
     public class PaymentController : AppBaseController
     {
         [HttpPost("create-checkout-session")]

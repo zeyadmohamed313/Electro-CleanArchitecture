@@ -1,11 +1,13 @@
 ﻿using Electro.Data.AppDbContext;
 using Electro_CleanArchitecture.Bases;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Electro_CleanArchitecture.Controllers
 {
-    public class ChatController:AppBaseController
+    [Authorize]
+    public class ChatController : AppBaseController
     {
         private readonly Context _dbContext;
 
@@ -17,21 +19,38 @@ namespace Electro_CleanArchitecture.Controllers
         [HttpGet("history/{userId}/{receiverId}")]
         public async Task<IActionResult> GetChatHistory(string userId, string receiverId)
         {
-            var Sender = await _dbContext.Users.FindAsync(int.Parse(userId));
-            var Receiver = await _dbContext.Users.FindAsync(int.Parse(receiverId));
+            var sender = await _dbContext.Users.FindAsync(int.Parse(userId));
+            var receiver = await _dbContext.Users.FindAsync(int.Parse(receiverId));
 
-            if(Sender == null) 
-                return NotFound("Sender Doesnot Exsist");
-            if (Receiver == null)
-                return NotFound("Receiver Doesnot Exsist");
+            if (sender == null)
+                return NotFound("Sender does not exist");
+            if (receiver == null)
+                return NotFound("Receiver does not exist");
 
             var messages = await _dbContext.ChatMessages
                 .Where(m => (m.SenderId == userId && m.ReceiverId == receiverId) ||
                             (m.SenderId == receiverId && m.ReceiverId == userId))
                 .OrderBy(m => m.Timestamp)
                 .ToListAsync();
+            
+            // Mark messages as read
+            var unreadMessages = messages.Where(m => !m.IsRead && m.ReceiverId == userId);
+            foreach (var message in unreadMessages)
+            {
+                message.IsRead = true;
+            }
+
+            await _dbContext.SaveChangesAsync();
 
             return Ok(messages);
+        }
+
+        [HttpGet("unread/{userId}")]
+        public async Task<IActionResult> GetUnreadCount(string userId)
+        {
+            var unreadCount = await _dbContext.ChatMessages
+                .CountAsync(m => m.ReceiverId == userId && !m.IsRead);
+            return Ok(unreadCount);
         }
     }
 }

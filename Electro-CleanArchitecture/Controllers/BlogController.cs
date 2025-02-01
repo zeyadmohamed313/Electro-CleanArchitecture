@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Electro_CleanArchitecture.Controllers
 {
+
     public class BlogController : AppBaseController
     {
         [HttpGet]
